@@ -66,11 +66,6 @@ In your **Conversation Service**, access your **Workspace** and click in *Dialog
 ```
 The ```"action": "callDiscovery"``` will be recognize with the code and will calling to Discovery service. You can see the code in the line [#90](https://github.com/sayurimizuguchi/conversation-with-discovery/blob/master/app.js#L90)
 
-This is [on GitHub](https://github.com/jbt/markdown-editor) so let me know if I've b0rked it somewhere.
-
-
-Props to Mr. Doob and his [code editor](http://mrdoob.com/projects/code-editor/), from which
-the inspiration to this, and some handy implementation hints, came.
 
 ### Documentation for using Watson Discovery and Watson Conversation
 
