@@ -1,0 +1,25 @@
+{
+  "name": "conversation-discovery-nodejs",
+  "version": "1.0.0",
+  "description": "One simple example using the Official project Conversation simple and adding the functionality for integrated with Discovery service",
+  "main": "server.js",
+  "scripts": {
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sayurimizuguchi/conversation-with-discovery.git"
+  },
+  "keywords": [
+    "discovery",
+    "conversation",
+    "node.js"
+  ],
+  "author": "Conversation simple authors and Sayuri Mizuguchi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sayurimizuguchi/conversation-with-discovery/issues"
+  },
+  "homepage": "https://github.com/sayurimizuguchi/conversation-with-discovery#readme"
+}
