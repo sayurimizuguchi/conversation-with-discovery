@@ -5,7 +5,6 @@ require('dotenv').config({ silent: true });
 var express = require('express'); // app server
 var bodyParser = require('body-parser'); // parser for post requests
 var watson = require('watson-developer-cloud'); // watson sdk
-var xlsx = require('xlsx');
 
 //setup discovery
 var DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
