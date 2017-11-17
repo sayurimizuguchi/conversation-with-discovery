@@ -4,19 +4,25 @@ require('dotenv').config({ silent: true });
 
 var express = require('express'); // app server
 var bodyParser = require('body-parser'); // parser for post requests
-var watson = require('watson-developer-cloud'); // watson sdk
 
-//setup discovery
+//setup watson services
+var ConversationV1 = require('watson-developer-cloud/conversation/v1'); // watson sdk
 var DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
 
-//discovery service credentials
+var app = express();
+
+// Bootstrap application settings
+app.use(express.static('./public')); // load UI from public folder
+app.use(bodyParser.json());
+
+//discovery config
 var discovery = new DiscoveryV1({
   username: process.env.DISCOVERY_USERNAME,
   password: process.env.DISCOVERY_PASSWORD,
   version_date: '2017-05-26'
 });
 
-//discovery params
+//discovery params for methods
 var params = {
     'query': "Sayuri",
     //these values are inside the .env file
@@ -28,14 +34,8 @@ var params = {
   //  highlight: true // if you want to enable, uncomment
 }
 
-var app = express();
-
-// Bootstrap application settings
-app.use(express.static('./public')); // load UI from public folder
-app.use(bodyParser.json());
-
-// Create the service wrapper
-var conversation = watson.conversation({
+// conversation config
+var conversation = new ConversationV1({
     url: 'https://gateway.watsonplatform.net/conversation/api',
     username: process.env.CONVERSATION_USERNAME || 'replace with the username',
     password: process.env.CONVERSATION_PASSWORD || 'replace with the password',
@@ -43,7 +43,7 @@ var conversation = watson.conversation({
     version: 'v1'
 });
 
-// Endpoint to be call from the client side
+// Endpoint to be call from the client side for message
 app.post('/api/message', function(req, res) {
     var workspace = process.env.WORKSPACE_ID || '<workspace-id>';
     if (!workspace || workspace === '<workspace-id>') {
@@ -84,7 +84,6 @@ app.post('/api/message', function(req, res) {
  * @return {Object}          The response with the updated message
  */
 function updateMessage(res, input, response) {
-
     if (!response.output) {
         response.output = {};
     } else if (response.output.action === 'callDiscovery') {
