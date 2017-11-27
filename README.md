@@ -30,7 +30,7 @@ Open the command line in the extracted repository, and run: ```npm install --sav
 
 Copy or rename the `.env.example` file to `.env` (nothing before the dot).
 
-Replace the variables in the `.env` file with your **Service credentials** for each service. Or the service that you want to use. For example:
+Replace the variables in the `.env` file with your **Service credentials** for Discovery and Conversation. Or the service that you want to use. For example:
 
 Paste  the `password` and `username` values (without quotation marks) from the JSON into the `CONVERSATION_PASSWORD` and `CONVERSATION_USERNAME`:
 
