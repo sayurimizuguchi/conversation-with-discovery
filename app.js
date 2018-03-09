@@ -24,12 +24,12 @@ var discovery = new DiscoveryV1({
 
 //discovery params for methods
 var params = {
-    'query': "Sayuri",
-    //these values are inside the .env file
-    'environment_id': process.env.DISCOVERY_ENVIRONMENT_ID,
-    'collection_id': process.env.DISCOVERY_COLLECTION_ID,
-    'configuration_id': process.env.DISCOVERY_CONFIGURATION_ID,
-    'passages': true, //if you want to disable, set to false
+    'query': "query string",
+    //natural_language_query: '', if you want to use natural language query, set params.natural_language_query with the input from the user!
+    environment_id: process.env.DISCOVERY_ENVIRONMENT_ID, //these 29-31 values are inside the .env file
+    collection_id: process.env.DISCOVERY_COLLECTION_ID,
+    configuration_id: process.env.DISCOVERY_CONFIGURATION_ID,
+    passages: true, //if you want to disable, set to false
     return: 'text, title'
   //  highlight: true // if you want to enable, uncomment
 }
@@ -39,12 +39,12 @@ var conversation = new ConversationV1({
     url: 'https://gateway.watsonplatform.net/conversation/api',
     username: process.env.CONVERSATION_USERNAME || 'replace with the username',
     password: process.env.CONVERSATION_PASSWORD || 'replace with the password',
-    version_date: '2016-07-11',
+    version_date: '2018-02-16', //set currenct date, check here https://www.ibm.com/watson/developercloud/conversation/api/v1/#versioning
     version: 'v1'
 });
 
 // Endpoint to be call from the client side for message
-app.post('/api/message', function(req, res) {
+app.post('/api/message', (req, res) => {
     var workspace = process.env.WORKSPACE_ID || '<workspace-id>';
     if (!workspace || workspace === '<workspace-id>') {
         return res.json({
@@ -76,7 +76,7 @@ app.post('/api/message', function(req, res) {
     });
 });
 
-/**
+/*
  * Updates the response text using the intent confidence
  * @param  {Object} res The node.js http response object
  * @param  {Object} input The request to the Conversation service
@@ -87,19 +87,27 @@ function updateMessage(res, input, response) {
     if (!response.output) {
         response.output = {};
     } else if (response.output.action === 'callDiscovery') {
+      /* if you want to use natural_language_query, set here the input from the user like my example: 
+      params.natural_language_query = response.input.text || null;
+      */
         console.log('Calling discovery.. ');
-
-        discovery.query(params, (error, results) => {
+        discovery.query(params, (error, returnDiscovery) => {
             if (error) {
               next(error);
             } else {
-              console.log(results);              
-              //sending the result for the user...
-              response.output.text = 'Discovery call with success, check the results: <br>' + results.passages[0].passage_text;
+              console.log('return from discovery: '+returnDiscovery);
+              //if you want to send all text returned from discovery, discomment these lines
+              /*  var text;
+                  for (i = 0; i < returnDiscovery.results.length; i++) {
+                    text += returnDiscovery.results[i].text + "<br>";
+                  }
+              //sending the TEXT returned from discovery results
+              response.output.text = 'Discovery call with success, check the results: <br>' + text; //results */
+              //sending the PASSAGES returned from discovery results
+              response.output.text = 'Discovery call with success, check the results: <br>' + returnDiscovery.passages[0].passage_text; //passageResults
               return res.json(response);
             };
         });
-
     } else if (response.output && response.output.text) {
         return res.json(response);
     }
