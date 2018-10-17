@@ -1,6 +1,12 @@
 # Conversation with Discovery
 
 This is one simple example based on the Official repository from IBM Developers, [conversation-simple](https://github.com/watson-developer-cloud/conversation-simple).
+This project is focused on show how to use Watson Assistant (Formerly Conversation) with Discovery, and send your Discovery queries to the user in your Virtual Assistant. 
+
+Awesome, right? Everything open source!
+
+You can open ISSUES if you are having problems in using the repository.
+You can open one ASK on StackOverflow if you have doubts about anything.
 
 ## Basic useful feature list:
 
