@@ -1,60 +1,60 @@
-# Conversation with Discovery
+# Assistant with Discovery
 
-This is one simple example based on the Official repository from IBM Developers, [conversation-simple](https://github.com/watson-developer-cloud/conversation-simple).
+This is a simple example application based on the IBM Developers Official Conversation Simple repository, [conversation-simple](https://github.com/watson-developer-cloud/assistant-simple).
+
 This project is focused on show how to use Watson Assistant (Formerly Conversation) with Discovery, and send your Discovery queries to the user in your Virtual Assistant. 
 
 Awesome, right? Everything open source!
 
 You can open ISSUES if you are having problems in using the repository.
-You can open one ASK on StackOverflow if you have doubts about anything.
 
-## Basic useful feature list:
+## Basic feature list:
 
- * IBM Bluemix account.
- * Conversation and Discovery for uses Watson Services.
+ * An IBM Bluemix account.
+ * Conversation and Discovery for Watson Services.
  * Node.js server installed.
- 
- 
+
+
 ## Before you begin
 
 * Create a Bluemix account
-    * [Sign up](https://console.ng.bluemix.net/registration/?target=/catalog/%3fcategory=watson) in Bluemix, or use an existing account. 
+    * [Sign up](https://console.ng.bluemix.net/registration/?target=/catalog/%3fcategory=watson) in Bluemix, or use an existing account.
 * Create a Watson Conversation Service
 * Create a Watson Discovery Conversation Service
-  
+
 
 ## Installing locally
 
-If you want to modify the app or use it as a basis for building your own app, install it locally. 
+If you want to modify the app or use it as a basis to build your own app, install it locally.
 
 Use GitHub to clone the repository locally, or [download the .zip file](https://github.com/sayurimizuguchi/conversation-with-discovery/archive/master.zip) of the repository and extract the files.
 
 
-### After extract...
+### After extracting...
 
-Open the command line in the extracted repository, and run: ```npm install --save``` for install all packages and execute the app.
+Open the command line in the extracted repository and run: ```npm install --save``` to install all packages and execute the app.
 
-Copy or rename the `.env.example` file to `.env` (nothing before the dot).
+Copy or rename the `.env.example` file to `.env`.
 
-Replace the variables in the `.env` file with your **Service credentials** for Discovery and Conversation. Or the service that you want to use. For example:
+Replace the variables in the `.env` file with your **Service credentials** for either each service or the service which you want to use. For example:
 
-Paste  the `password` and `username` values (without quotation marks) from the JSON into the `CONVERSATION_PASSWORD` and `CONVERSATION_USERNAME`:
+Paste  the `password` and `username` values (without quotation marks) from the JSON into `CONVERSATION_PASSWORD` and `CONVERSATION_USERNAME`:
 
-    
+
     CONVERSATION_USERNAME=ca2905e6-7b5dxxxxx4408xxxxx3e604
     CONVERSATION_PASSWORD=87xxxxxpvU7l
-    
-**Obs.: You can see the Service Credentials accessing your Bluemix account and clicking  in your service, after it click in the: Service Credentials. Or, using the [Cloud Foundry](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and using the command: `cf service-key my-conversation-service myKey` after logged.**
 
-### After install the packages
+**Obs.: You can see the Service Credentials accessing your Bluemix account and clicking in your service tab, then Service Credentials. Another way to access it is by using the [Cloud Foundry link](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and using the command `cf service-key my-conversation-service myKey` after logging in.**
 
-After install, use the command line and run ```node server.js``` for execute the app. Access your app with the url: ```localhost:3000```
+### After installing the packages
+
+Use the command line and run ```node server.js``` to execute the app. Access your app with the url: ```localhost:3000```
 
 
 
 ### Important to know
 
-In your **Conversation Service**, access your **Workspace** and click in *Dialog*, for call the Discovery Service, replace the Node that you want to use to call the Discovery service and replace your JSON to: 
+In your **Conversation Service**, access your **Workspace** and click in *Dialog*. To call the Discovery Service, replace the Node that you want to use to call the Discovery service and replace your JSON to:
 
 
 ```javascript
@@ -70,7 +70,7 @@ In your **Conversation Service**, access your **Workspace** and click in *Dialog
   }
 }
 ```
-The ```"action": "callDiscovery"``` will be recognize with the code and will calling to Discovery service. You can see the code in the line [#90](https://github.com/sayurimizuguchi/conversation-with-discovery/blob/master/app.js#L90)
+The ```"action": "callDiscovery"``` will be recognized within the code and will call the Discovery service. You can view the code in the line [#90] of (https://github.com/sayurimizuguchi/conversation-with-discovery/blob/master/app.js#L90)
 
 
 ### Documentation for using Watson Discovery and Watson Conversation
