@@ -1,18 +1,14 @@
 # Assistant with Discovery
 
-This is a simple example application based on the IBM Developers Official Conversation Simple repository, [conversation-simple](https://github.com/watson-developer-cloud/assistant-simple).
-
-This project is focused on show how to use Watson Assistant (Formerly Conversation) with Discovery, and send your Discovery queries to the user in your Virtual Assistant. 
+This project is focused on show how to use _Watson Assistant_ (Formerly Conversation) with _Watson Discovery_, and send your Discovery queries to the user in your Virtual Assistant. 
 
 Awesome, right? Everything open source!
-
-You can open ISSUES if you are having problems in using the repository.
 
 ## Basic feature list:
 
  * An IBM Bluemix account.
- * Conversation and Discovery for Watson Services.
- * Node.js server installed.
+ * Conversation and Discovery from AI - Watson Services.
+ * Node.js installed.
 
 
 ## Before you begin
@@ -20,7 +16,11 @@ You can open ISSUES if you are having problems in using the repository.
 * Create a Bluemix account
     * [Sign up](https://console.ng.bluemix.net/registration/?target=/catalog/%3fcategory=watson) in Bluemix, or use an existing account.
 * Create a Watson Conversation Service
+    * Training your chatbot
+    * Create an action variable to fire Discovery (example below on the instructions)
 * Create a Watson Discovery Conversation Service
+    * Training with your documents.
+    * Prepare your service credentials
 
 
 ## Installing locally
@@ -32,17 +32,20 @@ Use GitHub to clone the repository locally, or [download the .zip file](https://
 
 ### After extracting...
 
-Open the command line in the extracted repository and run: ```npm install --save``` to install all packages and execute the app.
+- Open the command line in the extracted repository and run: ```npm install --save``` to install all packages and execute the app.
+- Copy or _rename_ the `.env.example` file to `.env`.
 
-Copy or rename the `.env.example` file to `.env`.
+Insert the information about the Enviroment Variables in the `.env` file with your **Service credentials** from _each service_. 
 
-Replace the variables in the `.env` file with your **Service credentials** for either each service or the service which you want to use. For example:
-
-Paste  the `password` and `username` values (without quotation marks) from the JSON into `CONVERSATION_PASSWORD` and `CONVERSATION_USERNAME`:
-
+For example:
 
     CONVERSATION_USERNAME=ca2905e6-7b5dxxxxx4408xxxxx3e604
     CONVERSATION_PASSWORD=87xxxxxpvU7l
+    DISCOVERY_USERNAME=xydwhudhwadpaiwh
+    DISCOVERY_PASSWORD=hcihaidawida
+    DISCOVERY_ENVIRONMENT_ID=hidaodhaiwh
+    DISCOVERY_CONFIGURATION_ID=hidoawhdaio
+    DISCOVERY_COLLECTION_ID=otiesorpawi
 
 **Obs.: You can see the Service Credentials accessing your Bluemix account and clicking in your service tab, then Service Credentials. Another way to access it is by using the [Cloud Foundry link](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) and using the command `cf service-key my-conversation-service myKey` after logging in.**
 
@@ -51,10 +54,20 @@ Paste  the `password` and `username` values (without quotation marks) from the J
 Use the command line and run ```node server.js``` to execute the app. Access your app with the url: ```localhost:3000```
 
 
+### Tips
 
-### Important to know
+#### Issues
 
-In your **Conversation Service**, access your **Workspace** and click in *Dialog*. To call the Discovery Service, replace the Node that you want to use to call the Discovery service and replace your JSON to:
+- You can Ask a QUESTION on [StackOverflow](https://stackoverflow.com/questions/ask) if you are having code doubts, and errors like `undefined`, [object Object], etc.
+- You can open an [ISSUE](https://github.com/sayurimizuguchi/conversation-with-discovery/issues/new) if you are having problems in using the repository, try to write more details as possible, the code, and the error message.
+
+#### Enviroment variables
+
+The first time that I was using enviroment variables was confused. My advice is to read [this](https://medium.com/@thejasonfile/using-dotenv-package-to-create-environment-variables-33da4ac4ea8f) article, which explaining how works enviroment variables. 
+
+#### Action Variable to fire Discovery service
+
+In your **Conversation Service**, access your **Workspace** and click in *Dialog*. To call the Discovery Service, replace the Node that you want to use to call the Discovery service, click on _JSON edit_ and add the `action` with the value `callDiscovery`. For instance:
 
 
 ```javascript
@@ -71,6 +84,7 @@ In your **Conversation Service**, access your **Workspace** and click in *Dialog
 }
 ```
 The ```"action": "callDiscovery"``` will be recognized within the code and will call the Discovery service. You can view the code in the line [#90] of (https://github.com/sayurimizuguchi/conversation-with-discovery/blob/master/app.js#L90)
+
 
 
 ### Documentation for using Watson Discovery and Watson Conversation
